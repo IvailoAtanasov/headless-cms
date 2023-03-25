@@ -1,6 +1,5 @@
 import React from "react";
 import AuthLayout from "../../layouts/AuthLayout";
-import Layout from "@/layouts/Layout";
 import { AuthForm } from "@/components/form-components/auth";
 import { Input } from "@/components/form-components/input";
 import { SubmitButton } from "@/components/form-components/submitButton";
@@ -53,7 +52,10 @@ const Login = () => {
         label={"Потребителско име"}
         errors={errors}
         sx={{
-          backgroundColor: "#ffffff",
+          "& css-o943dk-MuiFormLabel-root-MuiInputLabel-root": {
+            color: "#000000",
+          },
+          backgroundColor: "#fcfcfc",
           borderRadius: "0.25rem",
           fontWeight: "bold",
         }}
@@ -68,7 +70,7 @@ const Login = () => {
         label={"Парола"}
         errors={errors}
         sx={{
-          backgroundColor: "#ffffff",
+          backgroundColor: "#fcfcfc",
           borderRadius: "0.25rem",
         }}
         variant="filled"
@@ -110,9 +112,5 @@ const Login = () => {
 export default Login;
 
 Login.getLayout = function getLayout(login) {
-  return (
-    <Layout>
-      <AuthLayout>{login}</AuthLayout>
-    </Layout>
-  );
+  return <AuthLayout>{login}</AuthLayout>;
 };

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Layout from "@/layouts/Layout";
 import AuthLayout from "@/layouts/AuthLayout";
 
 // import { NewPasswordValidationSchema } from "../utils/validation/validationSchema";
@@ -96,9 +95,5 @@ const NewPasswordPage = () => {
 export default NewPasswordPage;
 
 NewPasswordPage.getLayout = function getLayout(newpass) {
-  return (
-    <Layout>
-      <AuthLayout>{newpass}</AuthLayout>
-    </Layout>
-  );
+  return <AuthLayout>{newpass}</AuthLayout>;
 };

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Layout from "@/layouts/Layout";
 import AuthLayout from "@/layouts/AuthLayout";
 
 // import { ResetPasswordValidationSchema } from "../utils/validation/validationSchema";
@@ -92,9 +91,5 @@ const ResetPassword = () => {
 export default ResetPassword;
 
 ResetPassword.getLayout = function getLayout(reset) {
-  return (
-    <Layout>
-      <AuthLayout>{reset}</AuthLayout>
-    </Layout>
-  );
+  return <AuthLayout>{reset}</AuthLayout>;
 };

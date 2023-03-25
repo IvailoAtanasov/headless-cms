@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Layout from "@/layouts/Layout";
+
 import AuthLayout from "@/layouts/AuthLayout";
 
 // import { ConfirmPasswordValidationSchema } from "../utils/validation/validationSchema";
@@ -133,9 +133,5 @@ const ConfirmPassword = () => {
 export default ConfirmPassword;
 
 ConfirmPassword.getLayout = function getLayout(confirm) {
-  return (
-    <Layout>
-      <AuthLayout>{confirm}</AuthLayout>
-    </Layout>
-  );
+  return <AuthLayout>{confirm}</AuthLayout>;
 };
