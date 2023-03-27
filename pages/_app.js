@@ -6,6 +6,7 @@ import createEmotionCache from "../utils/createEmotionCache";
 import { CacheProvider } from "@emotion/react";
 import Layout from "@/layouts/Layout";
 import { useRouter } from "next/router";
+import { ProSidebarProvider } from "react-pro-sidebar";
 
 const clientSideEmotionCache = createEmotionCache();
 
@@ -25,9 +26,11 @@ function MyApp({
     <CacheProvider value={emotionCache}>
       <ColorModeContext.Provider value={colorMode}>
         <ThemeProvider theme={theme}>
-          <LayoutComponent>
-            <Component {...pageProps} />
-          </LayoutComponent>
+          <ProSidebarProvider>
+            <LayoutComponent>
+              <Component {...pageProps} />
+            </LayoutComponent>
+          </ProSidebarProvider>
         </ThemeProvider>
       </ColorModeContext.Provider>
     </CacheProvider>
