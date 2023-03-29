@@ -127,3 +127,5 @@ export const useMode = () => {
 
   return [theme, colorMode];
 };
+
+// TODO implement redux slice for mode

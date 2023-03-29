@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { useTheme, styled } from "@mui/material";
+import { useTheme, styled, Typography } from "@mui/material";
 import Box from "@mui/material/Box";
 import MuiDrawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
@@ -20,6 +20,9 @@ import PeopleOutlineOutlinedIcon from "@mui/icons-material/PeopleOutlineOutlined
 import ReceiptOutlinedIcon from "@mui/icons-material/ReceiptOutlined";
 import CalendarMonthOutlinedIcon from "@mui/icons-material/CalendarMonthOutlined";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
+import Avatar from "@mui/material/Avatar";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import ListSubheader from "@mui/material/ListSubheader";
 
 //Styled components
 const drawerWidth = 240;
@@ -65,12 +68,6 @@ const Drawer = styled(MuiDrawer, {
 
 const routes = [
   {
-    id: 1,
-    label: "Дашборд",
-    path: "/",
-    icon: HomeOutlinedIcon,
-  },
-  {
     id: 2,
     label: "Поръчки",
     path: "/orders",
@@ -88,6 +85,9 @@ const routes = [
     path: "/customers",
     icon: PeopleOutlineOutlinedIcon,
   },
+];
+
+const appRoutes = [
   {
     id: 5,
     label: "Календар",
@@ -97,6 +97,9 @@ const routes = [
 ];
 
 const SideBar = ({ children }) => {
+  const isDesctop = useMediaQuery("(min-width:960px)");
+
+  console.log(isDesctop);
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [open, setOpen] = React.useState(false);
@@ -132,8 +135,59 @@ const SideBar = ({ children }) => {
             {!open ? <MenuIcon /> : <ChevronLeftIcon />}
           </IconButton>
         </Box>
-        <Divider />
+        {open && (
+          <Avatar
+            alt="brimeks logo"
+            src="/brimeks-logo.png"
+            sx={{
+              width: "6rem",
+              height: "4rem",
+              backgroundColor: "#ffffff",
+              mr: "auto",
+              ml: "auto",
+              mb: "1rem",
+            }}
+          />
+        )}
+
         <List>
+          <Link href="/">
+            <ListItem
+              disablePadding
+
+              // sx={{ display: "flex", justifyContent: "flex-end" }}
+            >
+              <Tooltip title="Дашборд" placement="right">
+                <ListItemButton
+                  sx={{
+                    minHeight: 48,
+                    justifyContent: open ? "initial" : "center",
+                    px: 2.5,
+                  }}
+                >
+                  <ListItemIcon
+                    sx={{
+                      minWidth: 0,
+                      mr: open ? 3 : "auto",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <HomeOutlinedIcon />
+                  </ListItemIcon>
+                  <ListItemText
+                    primary="Дашборд"
+                    sx={open ? { opacity: 1, ml: "1.5rem" } : { opacity: 0 }}
+                  />
+                </ListItemButton>
+              </Tooltip>
+            </ListItem>
+          </Link>
+          {open && (
+            <Typography sx={{ mt: "2rem", ml: "1.5rem", mb: "1rem" }}>
+              Управление
+            </Typography>
+          )}
+
           {routes?.map((item) => (
             <Link href={item.path}>
               <ListItem key={item.id} disablePadding sx={{ display: "block" }}>
@@ -156,7 +210,41 @@ const SideBar = ({ children }) => {
                     </ListItemIcon>
                     <ListItemText
                       primary={item.label}
-                      sx={{ opacity: open ? 1 : 0 }}
+                      sx={open ? { opacity: 1, ml: "1.5rem" } : { opacity: 0 }}
+                    />
+                  </ListItemButton>
+                </Tooltip>
+              </ListItem>
+            </Link>
+          ))}
+          {open && (
+            <Typography sx={{ mt: "2rem", ml: "1.5rem", mb: "1rem" }}>
+              Приложения
+            </Typography>
+          )}
+          {appRoutes?.map((item) => (
+            <Link href={item.path}>
+              <ListItem key={item.id} disablePadding sx={{ display: "block" }}>
+                <Tooltip title={item.label} placement="right">
+                  <ListItemButton
+                    sx={{
+                      minHeight: 48,
+                      justifyContent: open ? "initial" : "center",
+                      px: 2.5,
+                    }}
+                  >
+                    <ListItemIcon
+                      sx={{
+                        minWidth: 0,
+                        mr: open ? 3 : "auto",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <item.icon />
+                    </ListItemIcon>
+                    <ListItemText
+                      primary={item.label}
+                      sx={open ? { opacity: 1, ml: "1.5rem" } : { opacity: 0 }}
                     />
                   </ListItemButton>
                 </Tooltip>
